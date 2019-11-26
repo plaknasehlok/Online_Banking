@@ -38,6 +38,8 @@ setTimeout("disableBackButton()", 0);
 
 <div class="topnav">
   <a href="adminsview">View new requests</a>
+  
+  
   <a href="adminlogout" style="float:right">Logout</a>
   
  </div>

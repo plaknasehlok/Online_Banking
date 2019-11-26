@@ -37,12 +37,35 @@ a:active {
   background-color: transparent;
   text-decoration: underline;
 }
+/* Style the top navigation bar */
+.topnav {
+  overflow: hidden;
+  background-color: #333;
+}
+
+/* Style the topnav links */
+.topnav a {
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+/* Change color on hover */
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
 </style>
 <meta charset="ISO-8859-1">
 <title>LogOut Session</title>
 </head>
 <body>
-<h1>You have logged out.</h1>
+<body>
+<div class="topnav">
 <a href="/">Back to Home Page</a><br>
+</div>
+<h1>You have logged out.</h1>
 </body>
 </html>

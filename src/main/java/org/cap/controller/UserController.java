@@ -4,10 +4,12 @@ import org.cap.entities.Account_Details;
 import org.cap.entities.Login_Details;
 import org.cap.entities.Transaction_Details;
 import org.cap.entities.Admin;
+import org.cap.entities.Beneficiary;
 import org.cap.entities.User_Profiles;
 
 import org.cap.service.AccountDetailsService;
 import org.cap.service.AdminService;
+import org.cap.service.BeneficiaryService;
 import org.cap.service.LoginDetailsService;
 import org.cap.service.TransactionDetailsService;
 import org.cap.service.User_ProfilesService;
@@ -105,6 +107,20 @@ public class UserController {
 		this.service4 = service4;
 	}
 	
+	@Autowired
+	private BeneficiaryService service5;
+
+	public BeneficiaryService getService5() {
+		return service5;
+	}
+
+	public void setService5(BeneficiaryService service5) {
+		this.service5 = service5;
+	}
+	/*@RequestMapping("/error")
+	public ModelAndView error() {
+		return new ModelAndView("errorpage", new HashMap<>());
+	}*/
 
 	@RequestMapping("/")
 	public ModelAndView index() {
@@ -196,6 +212,16 @@ public class UserController {
 			ModelAndView mv = new ModelAndView("dashboard", map);
 			return mv;
 		} else {
+			try {
+				Login_Details regacc = service.findUserByUser_Id(user_id);
+				System.out.println("user exists");
+				
+			} catch (Exception e) {
+				Map<String, String> map = new HashMap<>();
+				map.put("error", "user doesn't exist");
+				ModelAndView mv = new ModelAndView("login", map);
+				return mv;
+			}
 			boolean flag = service.validateCredentials(user_id, password);
 			if (flag) {
 				/*
@@ -210,6 +236,8 @@ public class UserController {
 				// map.put("user_id", user_id);
 				
 				String acc_no=service.findAccNo(user_id);
+				session.setAttribute("acc_no",acc_no);
+
 				map.put("acc_no_fk", acc_no);
 				ModelAndView mv = new ModelAndView("dashboard", map);
 				return mv;
@@ -231,8 +259,22 @@ public class UserController {
 			Map<String, Object> map = new HashMap<>();
 			System.out.println("good");
 			map.put("user_id", uname);
+			
+			String acc_no=(String) session.getAttribute("acc_no");
+			
+			List<Beneficiary> bene =service5.allBene(acc_no);
+			List<String> beneList = new ArrayList<String>();
+			
+			for (Beneficiary b : bene) {
+	
+				beneList.add(b.getBene_acc_no());
+			}
+			System.out.println(beneList);
+			map.put("bene_accounts",beneList);
+			
+			map.put("acc_no", acc_no);
 			ModelAndView mv = new ModelAndView("transferfunds", map);
-			return new ModelAndView("transferfunds", new HashMap<>());
+			return mv;
 		} else {
 			return new ModelAndView("login", new HashMap<>());
 		}
@@ -246,26 +288,24 @@ public class UserController {
 		 * String uname=(String)request.getSession().getAttribute("user_id");
 		 * System.out.println(uname);
 		 */
-
-		Account_Details senderuser = service2.sendFunds(sender_acc_no, amount);
-		Account_Details receiveruser = service2.receiveFunds(receiver_acc_no, amount);
-		Transaction_Details transaction = service3.createtrans(sender_acc_no, receiver_acc_no, amount);
-		
-		/*
-		 * String uid=(String) session.getAttribute("user_id"); String
-		 * email=service1.findEmail(uid);
-		 * 
-		 * Integer amt=transaction.getAmount(); String
-		 * rc=transaction.getReceiver_acc_no(); Integer bal=senderuser.getBalance();
-		 */
-		
-		
-		
 		Map<String, Object> map = new HashMap<>();
-		map.put("acc_no", senderuser.getAcc_no());
-		map.put("balance", senderuser.getBalance());
-		ModelAndView mv = new ModelAndView("userupdated", map);
-		return mv;
+		Integer balance=service2.findBalance(sender_acc_no);
+		if(balance<amount) {
+			String error="Not enough balance";
+			map.put("balanceerror", error);
+			ModelAndView mv = new ModelAndView("transferfunds", map);
+			return mv;
+		}
+		else {
+			Account_Details senderuser = service2.sendFunds(sender_acc_no, amount);
+			Account_Details receiveruser = service2.receiveFunds(receiver_acc_no, amount);
+			Transaction_Details transaction = service3.createtrans(sender_acc_no, receiver_acc_no, amount);
+			map.put("acc_no", senderuser.getAcc_no());
+			map.put("balance", senderuser.getBalance());
+			ModelAndView mv = new ModelAndView("userupdated", map);
+			return mv;
+		}
+		
 	}
 
 	@RequestMapping("/accountstatement")
@@ -349,7 +389,23 @@ public class UserController {
 	@RequestMapping("/adminloginprocess")
 	public ModelAndView adminloginProcess(HttpServletRequest request, HttpSession session, @RequestParam String user_id,
 			@RequestParam String password) {
-
+		if (session.getAttribute("user_id") != null) {
+			Map<String, Object> map = new HashMap<>();
+			
+			// map.put("user_id", user_id);
+			ModelAndView mv = new ModelAndView("adminview", map);
+			return mv;
+		} else {
+			try {
+				Admin regacc = service4.findUserByUser_Id(user_id);
+				System.out.println("user exists");
+				
+			} catch (Exception e) {
+				Map<String, String> map = new HashMap<>();
+				map.put("error", "admin doesn't exist");
+				ModelAndView mv = new ModelAndView("adminlogin", map);
+				return mv;
+			}
 		boolean flag = service4.validateCredentials(user_id, password);
 		if (flag) {
 
@@ -361,7 +417,6 @@ public class UserController {
 			ModelAndView mv = new ModelAndView("adminview", map);
 			return mv;
 		} else {
-
 			Map<String, String> map = new HashMap<>();
 			map.put("error", "Incorrect credentials");
 			ModelAndView mv = new ModelAndView("adminlogin", map);
@@ -369,11 +424,11 @@ public class UserController {
 		}
 
 	}
-
+	}
 	@RequestMapping("/adminsview")
 	public ModelAndView view(HttpSession session, HttpServletRequest request) {
 		if (session.getAttribute("user_id") != null) {
-			String uname = (String) request.getSession().getAttribute("user_id");
+			String uname = (String) session.getAttribute("user_id");
 			Map<String, Object> map = new HashMap<>();
 
 			List<List<String>> listOfProfiles = new ArrayList<List<String>>();
@@ -465,7 +520,7 @@ public class UserController {
 						MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
 						
 						messageHelper.setTo(InternetAddress.parse(email));
-						
+						messageHelper.setFrom("humpty07.tester@gmail.com","BerenBurg Bank");
 						messageHelper.setSubject("Account Creation");
 						//messageHelper.setText("Dear"+ nm);
 						//messageHelper.setText("Your account has been created in BerenBurg Bank");
@@ -539,7 +594,7 @@ public class UserController {
 				MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
 
 				messageHelper.setTo(InternetAddress.parse(emailid));
-
+				messageHelper.setFrom("humpty07.tester@gmail.com","BerenBurg Bank");
 				messageHelper.setSubject("OTP for forget password");
 				messageHelper.setText("Your otp is " + otp);
 
@@ -554,6 +609,16 @@ public class UserController {
 
 	@RequestMapping("/forgetpasswordprocess")
 	public ModelAndView createProcess(@RequestParam String user_id, @RequestParam String password) {
+		try {
+			Login_Details regacc = service.findUserByUser_Id(user_id);
+			System.out.println("user exists");
+			
+		} catch (Exception e) {
+			Map<String, String> map = new HashMap<>();
+			map.put("error", "user doesn't exist");
+			ModelAndView mv = new ModelAndView("otpsuccess", map);
+			return mv;
+		}
 		Login_Details updatepass = service.updatePassword(user_id, password);
 		Map<String, Object> map = new HashMap<>();
 		map.put("password", updatepass.getPassword());
@@ -562,4 +627,30 @@ public class UserController {
 
 	}
 
+	@RequestMapping("/beneficiary")
+	public ModelAndView beneficiary(HttpSession session, HttpServletRequest request) {
+		if (session.getAttribute("user_id") != null) {
+			String acc_no=(String) session.getAttribute("acc_no");
+			Map<String, Object> map = new HashMap<>();
+			map.put("acc_no", acc_no);
+			return new ModelAndView("beneficiaryadd", map);
+		}else {
+			return new ModelAndView("login", new HashMap<>());
+		}
+		
+	}
+	
+	@RequestMapping("/beneficiaryprocess")
+	public ModelAndView beneficiaryprocess(@RequestParam String bene_acc_no, @RequestParam String bene_nickname,
+			@RequestParam String bene_bankname,@RequestParam String acc_no_fk, HttpSession session, HttpServletRequest request) {
+		
+		Beneficiary b = service5.createBene(bene_acc_no, bene_nickname, bene_bankname, acc_no_fk);
+		Map<String, Object> map = new HashMap<>();
+		System.out.println("good");
+		map.put("bene_nickname", b.getBene_nickname());
+		map.put("bene_bankname", b.getBene_bankname());
+		ModelAndView mv = new ModelAndView("beneficiaryCreated", map);
+		return mv;
+	}
+	
 }

@@ -47,6 +47,7 @@ setTimeout("disableBackButton()", 0);
 	<a href="fundstransfer">NEFT</a>
 	<a href="fundstransfer">RTGS</a>
 	<a href="fundstransfer">IMPS</a>
+	<a href="beneficiary">Add Beneficiary</a>
 	<a href="accountstatement">Account Statement</a>
 	<a href="loggingout" style="float:right">LogOut</a>
 </div>

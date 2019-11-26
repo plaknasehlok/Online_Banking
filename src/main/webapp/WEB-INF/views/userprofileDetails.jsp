@@ -5,6 +5,26 @@
 
 <head>
 <style>
+/* Style the top navigation bar */
+.topnav {
+  overflow: hidden;
+  background-color: #333;
+}
+
+/* Style the topnav links */
+.topnav a {
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+/* Change color on hover */
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
 body {
 	font-family: Arial, Helvetica, sans-serif;
 	background:
@@ -89,7 +109,10 @@ button:hover {
 </head>
 
 <body>
-
+<div class="topnav">
+<a href="login" style="float:right" >Login Here</a>
+<a href="/">Back to Home Page</a><br>
+</div>
 	<script type="text/javascript">
 		function AadharValidate() {
 			var aadhar = document.getElementById("txtAadhar").value;
@@ -185,7 +208,7 @@ button:hover {
 			}
 		}
 
-		function ValidateResAddress() {
+		/* function ValidateResAddress() {
 			var letters = /^[0-9a-zA-Z]+$/;
 			var resaddr = document.frm.res_addr.value;
 
@@ -208,7 +231,7 @@ button:hover {
 				alert('Permanent address must have alphanumeric characters only');
 				uadd.focus();
 				return false;
-			}
+			} */
 		}
 	</script>
 
@@ -268,8 +291,7 @@ button:hover {
 			
 			<label for="text"><b> Residential Address: </b></label><br>
 
-	<input type="text" name="res_addr" required
-					onblur="ValidateResAddress();" />
+	<input type="text" name="res_addr" required />
 
 	</p>
 			
@@ -277,8 +299,7 @@ button:hover {
 			
 			<label for="text"><b> Permanent Address: </b></label><br>
 
-	<input type="text" name="per_addr" required
-					onblur="ValidatePerAddress();" />
+	<input type="text" name="per_addr" required/>
 
 	</p>
 			

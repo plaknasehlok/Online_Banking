@@ -4,11 +4,8 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
+
 <style>
-body {
-font-family: Arial, Helvetica, sans-serif;
-background:url(https://www.davesworld.com/wp-content/uploads/2015/10/Heat-Pump-Rebates.jpg);
-}
 /* Style the top navigation bar */
 .topnav {
   overflow: hidden;
@@ -29,19 +26,21 @@ background:url(https://www.davesworld.com/wp-content/uploads/2015/10/Heat-Pump-R
   background-color: #ddd;
   color: black;
 }
+
+body {
+font-family: Arial, Helvetica, sans-serif;
+background:url(https://www.davesworld.com/wp-content/uploads/2015/10/Heat-Pump-Rebates.jpg);
+}
+
 h4{
 text-align: center;
 color:black;
 }
 </style>
 <body>
-<!-- Toplink -->
- <div class="topnav">
-	<a href="fundstransfer">NEFT</a>
-	<a href="fundstransfer">RTGS</a>
-	<a href="fundstransfer">IMPS</a>
-	<a href="accountstatement">Account Statement</a>
-	<a href="loggingout" style="float:right">LogOut</a>
+<div class="topnav">
+<a href="login" style="float:right" >Login Here</a>
+<a href="/">Back to Home Page</a><br>
 </div>
 <h2>Your password was successfully updated</h2><br>
 

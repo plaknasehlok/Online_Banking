@@ -13,6 +13,7 @@
 .topnav {
   overflow: hidden;
   background-color: #333;
+  
 }
 
 /* Style the topnav links */
@@ -40,24 +41,19 @@
 
 <body class="w3-content" style="max-width:1200px">
 
-<div class="w3-panel">
-  <i class="w3-xlarge fa fa-bars"></i>
-</div>
 
 <!-- First Grid: Logo & About -->
 <div class="w3-row">
 <div class="w3-half w3-container">
-  <h1 class="w3-xxlarge w3-text-grey">Hello</h1>
-  <h1 class="w3-xxlarge w3-text-grey">We are</h1>
-  <h1 class="w3-jumbo">Berenberg</h1>
+  <h1 class="w3-xxlarge w3-text-grey">Welcome to</h1>
+  <h1 class="w3-jumbo">Berenberg Online</h1>
+
 </div>
 
-<div class="w3-half w3-container w3-xlarge w3-text-grey">
-  <p class="">Specifically developed for:
-  - Internet Banking
-  - Balance Enquiry - Funds Transfer to Another Account - Change of Profile Information - Account Statement</p>
-  <p>Berenberg means simplicity</p>
-</div>
+	<div class="w3-half w3-container w3-xlarge w3-text-grey">
+	  	<img src="https://img.etimg.com/thumb/width-200,height-200,imgsize-169788,resizemode-1,msid-71487585/you-could-lose-a-large-part-of-your-savings-if-your-bank-fails.jpg" style="float:right" >
+	</div>
+
 </div>
 
 <div class="topnav">
@@ -70,26 +66,23 @@
   <a href="adminlogin" style="float:right">Admin Login</a>
   
   <a href="forgotpassword" style="float:right">Forgot Password?</a>
+  
+
   <!-- <a href="#" style="float:right">Forgot Username?</a> -->
 </div>
 
 <!-- Second Grid: Resent -->
-<div class="w3-panel w3-text-grey">
-<h4>Our Services:</h4>
-</div>
 <div class="w3-row">
 <div class="w3-half w3-container">
   <img src="https://previews.123rf.com/images/oksananahorna/oksananahorna1710/oksananahorna171000099/87348006-online-banking-process-scheme-on-green-background-fund-management-transfer-between-banks-and-account.jpg" style="width:100%">
 </div>
 <div class="w3-half w3-container">
-  <img src="https://cdn.wallpapersafari.com/1/65/1A74vD.jpg" style="width:100%"> 
-  
-  <p class="w3-xlarge w3-text-grey">-Through NEFT </p>
-   <p class="w3-xlarge w3-text-grey">-Through RTGS</p>
- <p class="w3-xlarge w3-text-grey">-Through IMPS </p>
 
-</div>
-</div>
+  <img src="https://cdn.wallpapersafari.com/1/65/1A74vD.jpg" style="width:100%" > 
+  
+	</div>
+	
+	</div>
 
 <!-- Footer -->
 <div class="w3-row w3-section">
@@ -100,6 +93,23 @@
     <p>Kalpita Surve</p>
     <p>Neha Sharma</p>
     <p>Sankalp Kolhe</p>
+    
+  </div>
+   <div class="w3-third w3-right w3-large w3-black w3-text-white" style="height:300px">
+    <h2 style="text-align:center">Transaction through:</h2>
+    <p style="text-align:center">-Through NEFT </p>
+    <p style="text-align:center">-Through RTGS </p>
+    <p style="text-align:center">-Through IMPS </p>
+   
+  </div>
+  
+  <div class="w3-third w3-center w3-large w3-grey w3-text-white" style="height:300px">
+    <h2 style="text-align:center">Specifically developed for:</h2>
+    <p style="text-align:center">Internet Banking </p>
+    <p style="text-align:center">Balance Enquiry</p>
+    <p style="text-align:center">Funds Transfer to Another Account</p>
+    <p style="text-align:center">Account Statement</p>
+   
   </div>
  </div>
 

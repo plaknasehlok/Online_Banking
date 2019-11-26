@@ -3,11 +3,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<title>accountStatement</title>
-</head>
 <style>
+body{
+font-family: Arial, Helvetica, sans-serif;
+background:url(http://groupvisual.io/designinganalytics/wp-content/uploads/2016/08/dvux.png);
+}
+* {box-sizing: border-box}
+}
+h1{
+text-align:center;
+padding-top: 25px;
+}
+
+h4{
+text-align:center;
+padding-top: 40px;
+}
 /* Style the top navigation bar */
 .topnav {
   overflow: hidden;
@@ -36,39 +47,23 @@ function disableBackButton() {
 }
 setTimeout("disableBackButton()", 0);
 </script>
+<meta charset="ISO-8859-1">
+<title>beneficiaryadded</title>
+</head>
 <body>
+
 <!-- Toplink -->
  <div class="topnav">
 	<a href="fundstransfer">NEFT</a>
 	<a href="fundstransfer">RTGS</a>
 	<a href="fundstransfer">IMPS</a>
 	<a href="accountstatement">Account Statement</a>
-	<a href="beneficiary">Add Beneficiary</a>
 	<a href="loggingout" style="float:right">LogOut</a>
 </div>
 
-<header class="w3-container w3-teal">
-  <h1>Account Statement</h1>
-</header>
+<h1>Beneficiary Added !!!!</h1>
 
-<div class="w3-container w3-half w3-margin-top">
-
-
-<form name="frm" method="get" action="accountstatementprocess">
-
-	<p>
-		<input class="w3-input" type="date" name="fromdate" style="width:90%" required>
-		<label>From date:</label></p>
-		<p>
-		<input class="w3-input" type="date" name="todate" style="width:90%" required>
-		<label> To date: </label></p>
-
- <div class="row">
-      <input type="submit" value="Get Statement">
-    </div>
-
-</form>
-</div>
-
+<h4>Beneficiary Name:  ${bene_nickname}</h4>
+<h4>Your beneficiary Bank Name is ${bene_bankname}</h4>
 </body>
 </html>

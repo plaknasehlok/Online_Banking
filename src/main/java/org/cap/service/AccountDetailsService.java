@@ -8,5 +8,5 @@ public interface AccountDetailsService {
 	Account_Details sendFunds(String acc_no, Integer balance);
 	Account_Details receiveFunds(String acc_no, Integer balance);
 	Account_Details createAccount(String acc_no, String acc_type, Integer balance, Integer user_profile_id_fk);
-	
+	Integer findBalance(String acc_no);
 }

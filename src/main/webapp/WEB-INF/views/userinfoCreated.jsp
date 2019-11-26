@@ -47,6 +47,7 @@ footer {
 
 <div class="topnav">
 <a href="login" style="float:right" >Login Here</a>
+<a href="/">Back to Home Page</a><br>
 </div>
 <h2>Welcome ${f_name}</h2><br>
 <h4>Your User Id is ${user_profile_id}</h4><br>

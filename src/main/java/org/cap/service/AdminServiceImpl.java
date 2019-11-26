@@ -32,4 +32,9 @@ public class AdminServiceImpl implements AdminService{
 	public boolean validateCredentials(String user_id, String password) {
 		return dao.validateCredentials(user_id, password);
 	}
+
+	@Override
+	public Admin findUserByUser_Id(String user_id) {
+		return dao.findUserByUser_Id(user_id);
+	}
 }

@@ -62,7 +62,14 @@ public class AccountDetailsDaoImpl implements AccountDetailsDao {
 		
 	}
 	
-	
+	@Override
+	public Integer findBalance(String acc_no) {
+
+		Account_Details currentbalance = em.find(Account_Details.class, acc_no);
+		Integer currbal = currentbalance.getBalance();
+		return currbal;
+
+	}
 	
 }	
 	

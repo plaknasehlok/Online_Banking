@@ -47,7 +47,10 @@ public class AccountDetailsServiceImpl implements AccountDetailsService {
 	public Account_Details createAccount(String acc_no, String acc_type, Integer balance, Integer user_profile_id_fk) {
 		return dao.createAccount(acc_no, acc_type, balance, user_profile_id_fk);
 	}
-	
-	
+
+	@Override
+	public Integer findBalance(String acc_no) {
+		return dao.findBalance(acc_no);
+	}
 	
 }	
