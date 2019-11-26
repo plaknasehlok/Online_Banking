@@ -231,8 +231,8 @@ button:hover {
 				alert('Permanent address must have alphanumeric characters only');
 				uadd.focus();
 				return false;
-			} */
-		}
+			} 
+		}*/
 	</script>
 
 	<form name="frm" method="get" action="userprofileprocess">
@@ -241,8 +241,8 @@ button:hover {
 
 			<p>
 				<label for="text"><b>Aadhar No.:</b></label><br> <input
-					type="text" id="txtAadhar" name="aadhar_no"
-					onblur="AadharValidate();" />
+					type="text" id="txtAadhar" minlength="12"
+					maxlength="16" name="aadhar_no" required onblur="AadharValidate();" />
 			</p>
 			<p>
 				<label for="text"><b> First Name: </b></label> <br> <input
